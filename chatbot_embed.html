@@ -106,12 +106,10 @@
     </div>
 
     <script>
+        const backendUrl = 'https://ai-for-career-development.onrender.com';
         const chatMessages = document.getElementById('chat-messages');
         const userInput = document.getElementById('user-input');
         const sendButton = document.getElementById('send-button');
-        
-        // Replace with your Flask backend URL
-        const backendUrl = 'https://your-flask-app.herokuapp.com/get_answer';
         
         function addMessage(text, isUser) {
             const messageDiv = document.createElement('div');
