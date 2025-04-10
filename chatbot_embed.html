@@ -117,28 +117,7 @@
             z-index: 1001;
         }
     </style>
-    <script>
-        const chatContainer = document.getElementById('chat-container');
-        const chatLauncher = document.createElement('div');
-        chatLauncher.id = 'chat-launcher';
-        chatLauncher.innerHTML = '💬';
-        document.body.appendChild(chatLauncher);
 
-        chatLauncher.addEventListener('click', () => {
-            chatContainer.style.display = 'flex';
-            chatLauncher.style.display = 'none';
-        });
-
-        const closeButton = document.createElement('button');
-        closeButton.id = 'close-button';
-        closeButton.innerHTML = '❌';
-        document.getElementById('chat-header').appendChild(closeButton);
-
-        closeButton.addEventListener('click', () => {
-            chatContainer.style.display = 'none';
-            chatLauncher.style.display = 'flex';
-        });
-    </script>
 </head>
 <body>
     <div id="chat-container">
@@ -161,6 +140,27 @@
         const userInput = document.getElementById('user-input');
         const sendButton = document.getElementById('send-button');
         
+        const chatContainer = document.getElementById('chat-container');
+        const chatLauncher = document.createElement('div');
+        chatLauncher.id = 'chat-launcher';
+        chatLauncher.innerHTML = '💬';
+        document.body.appendChild(chatLauncher);
+
+        chatLauncher.addEventListener('click', () => {
+            chatContainer.style.display = 'flex';
+            chatLauncher.style.display = 'none';
+        });
+
+        const closeButton = document.createElement('button');
+        closeButton.id = 'close-button';
+        closeButton.innerHTML = '❌';
+        document.getElementById('chat-header').appendChild(closeButton);
+
+        closeButton.addEventListener('click', () => {
+            chatContainer.style.display = 'none';
+            chatLauncher.style.display = 'flex';
+        });
+
         function addMessage(text, isUser) {
             const messageDiv = document.createElement('div');
             messageDiv.classList.add('message');
