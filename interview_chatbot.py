@@ -13,9 +13,9 @@ CORS(app)
 
 
 # Load datasets
-df_career = pd.read_csv("Model\Career QA Dataset.csv")
-df_mock = pd.read_csv("Model\Mock-Interview-Questions.csv")
-df_smalltalk = pd.read_csv("Model\customSmalltalkResponses_en.csv")
+df_career = pd.read_csv("Career QA Dataset.csv")
+df_mock = pd.read_csv("Mock-Interview-Questions.csv")
+df_smalltalk = pd.read_csv("customSmalltalkResponses_en.csv")
 
 # Debugging: print column names
 df_mock.rename(columns={'questionText': 'question', 'answerText': 'answer'}, inplace=True)
