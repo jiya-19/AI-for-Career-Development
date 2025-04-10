@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Chatbot</title>
+    </head>
+<body>
+    <div id="chatbox" style="width: 100%; max-width: 600px; margin: 40px auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; font-family: Arial, sans-serif;">
+        <h2 style="text-align: center;">Interview Chatbot</h2>
+        <div id="messages" style="max-height: 400px; overflow-y: auto; margin-bottom: 20px;"></div>
+        <input type="text" id="question" placeholder="Ask an interview question..." style="width: 80%; padding: 10px;">
+        <button onclick="askQuestion()" style="padding: 10px;">Ask</button>
+    </div>
+    
+    <script>
+        const API_BASE = "http://localhost:5000"; // Change to your server URL if deployed
+    
+        async function askQuestion() {
+            const input = document.getElementById("question");
+            const question = input.value.trim();
+            if (!question) return;
+    
+            appendMessage("You: " + question, "user");
+            input.value = "";
+    
+            try {
+                const response = await fetch(`${API_BASE}/get_answer`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ question })
+                });
+    
+                const data = await response.json();
+                appendMessage("Chatbot: " + (data.answer || "Sorry, I couldn't find an answer."), "bot");
+            } catch (error) {
+                appendMessage("Chatbot: There was an error connecting to the server.", "bot");
+                console.error("Fetch error:", error);
+            }
+        }
+    
+        function appendMessage(text, sender) {
+            const messageBox = document.getElementById("messages");
+            const message = document.createElement("div");
+            message.textContent = text;
+            message.style.backgroundColor = sender === "user" ? "#d1e7ff" : "#f1f1f1";
+            message.style.margin = "10px";
+            message.style.padding = "10px";
+            message.style.borderRadius = "5px";
+            messageBox.appendChild(message);
+            messageBox.scrollTop = messageBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>
