@@ -9,7 +9,8 @@ import re
 import random
 from flask_cors import CORS
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
+
 
 
 # Load datasets
@@ -63,8 +64,11 @@ pickle.dump(smalltalk_dict, open("smalltalk_dict.pkl", "wb"))
 # Initialize Flask app
 #app = flask.Flask(__name__)
 
-@app.route('/get_answer', methods=['POST'])
+@app.route('/get_answer', methods=['POST', 'OPTIONS'])
 def get_answer():
+    if request.method == 'OPTIONS':
+        return jsonify({"message": "CORS preflight passed"}), 200
+    
     user_input = request.json['question'].lower().strip()
 
     # Handle exit command
