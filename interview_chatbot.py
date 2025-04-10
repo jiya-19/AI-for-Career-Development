@@ -104,4 +104,4 @@ def get_answer():
     return jsonify({"question": user_input, "answer": best_match_answer})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=10000)  # Port 10000 is default for Render
